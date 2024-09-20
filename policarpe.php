@@ -2,7 +2,7 @@
 /*
 Plugin Name: Policarpe
 Description: Un vínculo a la página web de Accesorios Espaciales.
-Version: 1.1
+Version: 0.0.0
 Author: APRDELESP
 */
 
