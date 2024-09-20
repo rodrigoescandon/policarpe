@@ -1,0 +1,37 @@
+#draggable-image {
+  width: 100px; /* Default width for desktop */
+  height: auto;
+}
+
+/* Media query for smaller screens (mobile) */
+/* @media screen and (max-width: 600px) {
+  #draggable-image {
+    width: 80px; /* Smaller width for mobile */
+  }
+} */
+
+@font-face {
+  font-family: "KarlMono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/KarlMonoST_Regular.woff2") format("woff2"); /* Adjust path if necessary */
+}
+
+/* General styles for the tooltip box */
+.tippy-box[data-theme~="policarpe"] {
+  font-family: "KarlMono", monospace;
+  font-size: 10px;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #000000;
+}
+
+/* The border */
+.tippy-box[data-theme~='policarpe'] > .tippy-svg-arrow > svg:first-child {
+  fill: #000000;
+}
+
+/* The fill */
+.tippy-box[data-theme~='policarpe'] > .tippy-svg-arrow > svg:last-child {
+  fill: #ffffff;
+}
