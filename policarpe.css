@@ -1,6 +1,9 @@
 #draggable-image {
   width: 100px; /* Default width for desktop */
   height: auto;
+  position: fixed;
+  cursor: move;
+  z-index: 9999;
 }
 
 /* Media query for smaller screens (mobile) */

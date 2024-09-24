@@ -4,12 +4,10 @@ jQuery(document).ready(function ($) {
   var dragging = false;
   var touchStartTime;
   var touchStartPos;
-  var defaultSrc = $image.attr('src');
-  var hoverSrc = $image.data('hover');
+  var defaultSrc = $image.attr("src");
+  var hoverSrc = $image.data("hover");
 
-  var messages = [
-    "Hola, soy Policarpe. ¡Pícame!",
-  ];
+  var messages = ["Hola, soy Policarpe. ¡Pícame!"];
   var randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
   var tooltipInstance = tippy("#draggable-image", {
@@ -25,7 +23,7 @@ jQuery(document).ready(function ($) {
     popperOptions: {
       modifiers: [
         {
-          name: 'preventOverflow',
+          name: "preventOverflow",
           options: {
             altAxis: true,
             tether: false,
@@ -50,10 +48,8 @@ jQuery(document).ready(function ($) {
     var randomY = Math.random() * maxY;
 
     $image.css({
-      position: "fixed",
       left: randomX + "px",
       top: randomY + "px",
-      cursor: "move",
     });
   }
 
@@ -77,7 +73,7 @@ jQuery(document).ready(function ($) {
   function updateTooltipPosition() {
     if (tippyTooltip.state.isVisible) {
       tippyTooltip.setProps({
-        getReferenceClientRect: () => $image[0].getBoundingClientRect()
+        getReferenceClientRect: () => $image[0].getBoundingClientRect(),
       });
     }
   }
@@ -100,12 +96,12 @@ jQuery(document).ready(function ($) {
   });
 
   $image.on("mouseenter", function () {
-    $image.attr('src', hoverSrc);
+    $image.attr("src", hoverSrc);
     tippyTooltip.show();
   });
 
   $image.on("mouseleave", function () {
-    $image.attr('src', defaultSrc);
+    $image.attr("src", defaultSrc);
     if (!dragging) {
       tippyTooltip.hide();
     }
@@ -115,28 +111,37 @@ jQuery(document).ready(function ($) {
   // Touch event handlers
   $image.on("touchstart", function (e) {
     touchStartTime = new Date().getTime();
-    touchStartPos = { x: e.originalEvent.touches[0].pageX, y: e.originalEvent.touches[0].pageY };
+    touchStartPos = {
+      x: e.originalEvent.touches[0].pageX,
+      y: e.originalEvent.touches[0].pageY,
+    };
   });
 
   $image.on("touchend", function (e) {
     var touchEndTime = new Date().getTime();
-    var touchEndPos = { x: e.originalEvent.changedTouches[0].pageX, y: e.originalEvent.changedTouches[0].pageY };
-    
+    var touchEndPos = {
+      x: e.originalEvent.changedTouches[0].pageX,
+      y: e.originalEvent.changedTouches[0].pageY,
+    };
+
     var touchDuration = touchEndTime - touchStartTime;
-    var touchDistance = Math.sqrt(Math.pow(touchEndPos.x - touchStartPos.x, 2) + Math.pow(touchEndPos.y - touchStartPos.y, 2));
+    var touchDistance = Math.sqrt(
+      Math.pow(touchEndPos.x - touchStartPos.x, 2) +
+        Math.pow(touchEndPos.y - touchStartPos.y, 2)
+    );
 
     if (touchDuration < 500 && touchDistance < 10) {
       // This was a tap, not a drag
       e.preventDefault(); // Prevent default link behavior
-      window.open($link.attr('href'), '_blank'); // Open link in new tab
+      window.open($link.attr("href"), "_blank"); // Open link in new tab
     }
   });
 
   // Handle click for non-touch devices
-  $link.on("click", function(e) {
+  $link.on("click", function (e) {
     if (!dragging) {
       e.preventDefault(); // Prevent default link behavior
-      window.open($(this).attr('href'), '_blank'); // Open link in new tab
+      window.open($(this).attr("href"), "_blank"); // Open link in new tab
     }
   });
 
