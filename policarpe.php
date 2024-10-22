@@ -9,13 +9,37 @@ Author: APRDELESP
 function policarpe_enqueue_scripts()
 {
     wp_enqueue_script('jquery-ui-draggable');
-    wp_enqueue_script('policarpe-js', plugin_dir_url(__FILE__) . 'policarpe.js', array('jquery', 'jquery-ui-draggable'), null, true);
+
+    // Load Popper.js first (Tippy.js dependency)
+    wp_enqueue_script(
+        'popper-js',
+        'https://unpkg.com/@popperjs/core@2',
+        array(),
+        null,
+        true
+    );
+
+    // Load Tippy.js after Popper.js
+    wp_enqueue_script(
+        'tippy-js',
+        'https://unpkg.com/tippy.js@6',
+        array('popper-js'),
+        null,
+        true
+    );
+
+    // Load your script last, with both dependencies
+    wp_enqueue_script(
+        'policarpe-js',
+        plugin_dir_url(__FILE__) . 'policarpe.js',
+        array('jquery', 'jquery-ui-draggable', 'popper-js', 'tippy-js'),
+        null,
+        true
+    );
     wp_enqueue_style('policarpe-css', plugin_dir_url(__FILE__) . 'policarpe.css');
     wp_enqueue_style('tippy-css', 'https://unpkg.com/tippy.js@6/dist/tippy.css');
     wp_enqueue_style('tippy-css-svg-arrow', 'https://unpkg.com/tippy.js@6/dist/svg-arrow.css');
     wp_enqueue_style('tippy-css-border', 'https://unpkg.com/tippy.js@6/dist/border.css');
-    wp_enqueue_script('popper-js', 'https://unpkg.com/@popperjs/core@2');
-    wp_enqueue_script('tippy-js', 'https://unpkg.com/tippy.js@6');
 }
 
 add_action('wp_enqueue_scripts', 'policarpe_enqueue_scripts');
